@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="317.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginlabtia.RegisterController">
+   <center>
+      <Pane prefHeight="680.0" prefWidth="439.0" style="-fx-background-color: #70a6ff;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="228.0" fitWidth="205.0" layoutX="56.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/logo.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="username" layoutX="34.0" layoutY="288.0" prefHeight="45.0" prefWidth="250.0" promptText="Username" style="-fx-background-color: white;" />
+            <PasswordField fx:id="password" layoutX="34.0" layoutY="339.0" prefHeight="45.0" prefWidth="250.0" promptText="Password" style="-fx-background-color: white;" />
+            <PasswordField fx:id="confirm_password" layoutX="34.0" layoutY="390.0" prefHeight="45.0" prefWidth="250.0" promptText="Confirm Password" style="-fx-background-color: white;" />
+            <TextField fx:id="nama" layoutX="34.0" layoutY="441.0" prefHeight="45.0" prefWidth="250.0" promptText="Nama" style="-fx-background-color: white;" />
+            <TextField fx:id="nim" layoutX="34.0" layoutY="493.0" prefHeight="45.0" prefWidth="250.0" promptText="NIM" style="-fx-background-color: white;" />
+            <Button fx:id="register" layoutX="34.0" layoutY="546.0" mnemonicParsing="false" onAction="#register_action" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #5494ff;" text="Register" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="pesan" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="602.0" prefHeight="17.0" prefWidth="252.0" text="Silakan daftar dengan data yang valid." textAlignment="CENTER" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
