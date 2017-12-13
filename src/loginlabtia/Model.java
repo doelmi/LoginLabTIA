@@ -129,6 +129,29 @@ public class Model {
         return false;
     }
 
+    public boolean cekNIM(String nim) throws SQLException {
+        Connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String query = "SELECT * FROM `user` WHERE NIM = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, nim);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            preparedStatement.close();
+            resultSet.close();
+        }
+        Disconnect();
+        return false;
+    }
+
     public String getPCName() {
         String hostname = "Unknown";
 

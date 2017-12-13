@@ -105,14 +105,27 @@ public class LoginController implements Initializable {
     @FXML
     public void login_action(ActionEvent event) throws SQLException {
         if (model.login(username.getText(), password.getText(), no_pc.getText())) {
-            if ("0".equals(model.getValidasi())) {
-                pesan.setText("Akun Anda belum divalidasi.");
-                pesan.setTextFill(Color.RED);
-                tutup.setVisible(false);
-            } else {
-                pesan.setText("Anda berhasil Login! Silakan tutup.");
-                pesan.setTextFill(Color.GREEN);
-                tutup.setVisible(true);
+            switch (model.getValidasi()) {
+                case "0":
+                    pesan.setText("Akun Anda belum divalidasi.");
+                    pesan.setTextFill(Color.RED);
+                    tutup.setVisible(false);
+                    break;
+                case "2":
+                    pesan.setText("Akun Anda telah diblokir.");
+                    pesan.setTextFill(Color.RED);
+                    tutup.setVisible(false);
+                    break;
+                case "3":
+                    pesan.setText("Akun terlarang.");
+                    pesan.setTextFill(Color.RED);
+                    tutup.setVisible(false);
+                    break;
+                default:
+                    pesan.setText("Anda berhasil Login! Silakan tutup.");
+                    pesan.setTextFill(Color.GREEN);
+                    tutup.setVisible(true);
+                    break;
             }
         } else {
             pesan.setText("Username atau Password salah.");
@@ -123,7 +136,7 @@ public class LoginController implements Initializable {
 
     @FXML
     public void go_action(ActionEvent event) throws SQLException {
-        alamat = "http://"+address.getText();
+        alamat = "http://" + address.getText();
         engine.load(alamat);
     }
 
@@ -131,10 +144,10 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         engine = webview.getEngine();
-        engine.load("http://"+alamat);
+        engine.load("http://" + alamat);
         address.setText(alamat);
         tutup.setVisible(false);
-        
+
         no_pc.setText(model.getPCName());
         no_pc.setEditable(false);
     }
