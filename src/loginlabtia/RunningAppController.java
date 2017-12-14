@@ -49,7 +49,7 @@ public class RunningAppController implements Initializable {
             pesan.setText("Database terkoneksi.");
             pesan.setTextFill(Color.GREEN);
 
-            model.updateStatusLogin(username.getText(), 1);
+            model.updateStatusLogin(username.getText(), 0);
             ((Node) event.getSource()).getScene().getWindow().hide();
 
             Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -79,17 +79,6 @@ public class RunningAppController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         username.setText(LoginController.username_);
-        try {
-            if (!model.isConnected()) {
-                pesan.setText("Koneksi database bermasalah.");
-                pesan.setTextFill(Color.RED);
-            } else {
-                pesan.setText("Database terkoneksi.");
-                pesan.setTextFill(Color.GREEN);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(RunningAppController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

@@ -58,7 +58,7 @@ public class LoginLabTIA extends Application {
     @Override
     public void stop() throws Exception {
         System.out.println("keluar stop");
-        super.stop(); //To change body of generated methods, choose Tools | Templates.
+//        super.stop(); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
