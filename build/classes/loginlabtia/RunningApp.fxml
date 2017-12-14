@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="359.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginlabtia.RunningAppController">
+   <top>
+      <Pane prefHeight="73.0" prefWidth="359.0" style="-fx-background-color: #70a6ff;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="21.0" text="Kamu login sebagai" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Pane prefHeight="103.0" prefWidth="359.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="36.0" prefHeight="46.0" prefWidth="330.0" text="username" textAlignment="CENTER">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <Pane prefHeight="51.0" prefWidth="359.0" style="-fx-background-color: #70a6ff;" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="292.0" layoutY="13.0" mnemonicParsing="false" onAction="#logout_action" style="-fx-background-color: #5494ff;" text="Logout" textFill="WHITE" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>

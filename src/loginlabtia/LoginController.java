@@ -11,15 +11,19 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -39,6 +43,8 @@ public class LoginController implements Initializable {
      */
     Model model = new Model();
 
+    public static String username_;
+
     @FXML
     WebView webview;
 
@@ -55,8 +61,26 @@ public class LoginController implements Initializable {
     WebEngine engine;
 
     @FXML
-    public void tutup_action(ActionEvent event) {
-        System.exit(0);
+    public void tutup_action(ActionEvent event) throws IOException {
+        ((Node) event.getSource()).getScene().getWindow().hide();
+
+        Stage stage;
+        Parent root;
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("RunningApp.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login Sebagai");
+        stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
+        stage.resizableProperty().setValue(Boolean.FALSE);
+
+        Platform.setImplicitExit(false);
+
+        stage.setOnCloseRequest((event1) -> {
+            System.out.println("keluar");
+            event1.consume();
+        });
+
+        stage.show();
     }
 
     @FXML
@@ -104,33 +128,27 @@ public class LoginController implements Initializable {
 
     @FXML
     public void login_action(ActionEvent event) throws SQLException {
-        if (model.login(username.getText(), password.getText(), no_pc.getText())) {
-            switch (model.getValidasi()) {
-                case "0":
-                    pesan.setText("Akun Anda belum divalidasi.");
-                    pesan.setTextFill(Color.RED);
-                    tutup.setVisible(false);
-                    break;
-                case "2":
-                    pesan.setText("Akun Anda telah diblokir.");
-                    pesan.setTextFill(Color.RED);
-                    tutup.setVisible(false);
-                    break;
-                case "3":
-                    pesan.setText("Akun terlarang.");
-                    pesan.setTextFill(Color.RED);
-                    tutup.setVisible(false);
-                    break;
-                default:
-                    pesan.setText("Anda berhasil Login! Silakan tutup.");
+        if (!model.isConnected()) {
+            pesan.setText("Koneksi database bermasalah.");
+            pesan.setTextFill(Color.RED);
+        } else {
+            if (model.login(username.getText(), password.getText(), no_pc.getText())) {
+                if ("1".equals(model.getValidasi())) {
+                    model.insertLogData(username.getText(), no_pc.getText());
+                    pesan.setText(model.Keterangan(model.getValidasi()));
                     pesan.setTextFill(Color.GREEN);
                     tutup.setVisible(true);
-                    break;
+                    username_ = username.getText();
+                } else {
+                    pesan.setText(model.Keterangan(model.getValidasi()));
+                    pesan.setTextFill(Color.RED);
+                    tutup.setVisible(false);
+                }
+            } else {
+                pesan.setText("Username atau Password salah.");
+                pesan.setTextFill(Color.RED);
+                tutup.setVisible(false);
             }
-        } else {
-            pesan.setText("Username atau Password salah.");
-            pesan.setTextFill(Color.RED);
-            tutup.setVisible(false);
         }
     }
 
@@ -138,6 +156,11 @@ public class LoginController implements Initializable {
     public void go_action(ActionEvent event) throws SQLException {
         alamat = "http://" + address.getText();
         engine.load(alamat);
+    }
+
+    @FXML
+    public void shutdown_action(MouseEvent event) throws IOException {
+        Runtime.getRuntime().exec("shutdown -s -t 0");
     }
 
     @Override

@@ -12,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  *
@@ -63,7 +62,7 @@ public class Model {
         }
     }
 
-    private boolean insertLogData(String username, String no_pc) throws SQLException {
+    public boolean insertLogData(String username, String no_pc) throws SQLException {
         Connect();
         String query = "INSERT INTO log(username, no_pc) VALUES (?, ?)";
         PreparedStatement preparedStatement = null;
@@ -115,7 +114,6 @@ public class Model {
             preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                insertLogData(username, no_pc);
                 setValidasi(resultSet.getString("Aktif"));
                 return true;
             }
@@ -152,6 +150,29 @@ public class Model {
         return false;
     }
 
+    public String Keterangan(String status) throws SQLException {
+        Connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String query = "SELECT keterangan FROM status_user WHERE id = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getString("keterangan");
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            preparedStatement.close();
+            resultSet.close();
+        }
+        Disconnect();
+        return null;
+    }
+
     public String getPCName() {
         String hostname = "Unknown";
 
@@ -165,4 +186,5 @@ public class Model {
 
         return hostname;
     }
+    
 }
