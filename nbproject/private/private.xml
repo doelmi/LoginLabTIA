@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/Model.java</file>
-            <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/Register.fxml</file>
             <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/LoginController.java</file>
             <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/RegisterController.java</file>
-            <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/LoginAdminController.java</file>
+            <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/LoginLabTIA.java</file>
+            <file>file:/C:/Users/LabTIA-40/Documents/NetBeansProjects/LoginLabTIA/src/loginlabtia/RunningAppController.java</file>
         </group>
     </open-files>
 </project-private>

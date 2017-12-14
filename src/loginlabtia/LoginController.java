@@ -108,6 +108,7 @@ public class LoginController implements Initializable {
         stage.setTitle("Login Admin");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UTILITY);
+        stage.resizableProperty().setValue(Boolean.FALSE);
         stage.initOwner(lewati.getScene().getWindow());
         stage.showAndWait();
     }
@@ -122,6 +123,7 @@ public class LoginController implements Initializable {
         stage.setTitle("Register");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UTILITY);
+        stage.resizableProperty().setValue(Boolean.FALSE);
         stage.initOwner(daftar.getScene().getWindow());
         stage.showAndWait();
     }
@@ -161,7 +163,17 @@ public class LoginController implements Initializable {
 
     @FXML
     public void shutdown_action(MouseEvent event) throws IOException {
-        Runtime.getRuntime().exec("shutdown -s -t 0");
+        Stage stage;
+        Parent root;
+        stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("ShutdownConfirm.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Konfirmasi Shtudown");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UTILITY);
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.initOwner(daftar.getScene().getWindow());
+        stage.showAndWait();
     }
 
     @Override

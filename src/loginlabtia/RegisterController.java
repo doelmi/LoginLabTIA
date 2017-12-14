@@ -45,6 +45,9 @@ public class RegisterController implements Initializable {
             } else if (password.getText().length() == 0) {
                 pesan.setText("Password harus diisi.");
                 pesan.setTextFill(Color.RED);
+            } else if (!password.getText().equals(confirm_password.getText())) {
+                pesan.setText("Password dan Confirm Password tidak sama.");
+                pesan.setTextFill(Color.RED);
             } else if (nama.getText().length() == 0) {
                 pesan.setText("Nama harus diisi.");
                 pesan.setTextFill(Color.RED);
@@ -53,9 +56,6 @@ public class RegisterController implements Initializable {
                 pesan.setTextFill(Color.RED);
             } else if (model.cekNIM(nim.getText())) {
                 pesan.setText("NIM telah terdaftar.");
-                pesan.setTextFill(Color.RED);
-            } else if (!password.getText().equals(confirm_password.getText())) {
-                pesan.setText("Password dan Confirm Password tidak sama.");
                 pesan.setTextFill(Color.RED);
             } else {
                 if (model.register(username.getText(), password.getText(), nama.getText(), nim.getText())) {

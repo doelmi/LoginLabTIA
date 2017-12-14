@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginlabtia.ShutdownConfirmController">
+   <bottom>
+      <Pane prefHeight="50.0" prefWidth="396.0" style="-fx-background-color: #70a6ff;" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="272.0" layoutY="13.0" mnemonicParsing="false" onAction="#shutdown_action" style="-fx-background-color: #ff7070;" text="Shutdown" textFill="WHITE" />
+            <Button layoutX="221.0" layoutY="13.0" mnemonicParsing="false" onAction="#batal_action" style="-fx-background-color: #5494ff;" text="Batal" textFill="WHITE" />
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="89.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apakah Anda yakin ingin mematikan komputer ini?" wrappingWidth="256.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="81.0" fitWidth="57.0" layoutX="13.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/shutdown.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

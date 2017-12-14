@@ -25,6 +25,7 @@ public class LoginAdminController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Model model = new Model();
     
     @FXML
     Label pesan;
@@ -37,7 +38,7 @@ public class LoginAdminController implements Initializable {
     
     @FXML
     public void kirim_action(ActionEvent event){
-        if ("tiatiatia".equalsIgnoreCase(password_admin.getText())) {
+        if (("tiaifutm"+model.getPCName()).equalsIgnoreCase(password_admin.getText())) {
             System.exit(0);
         }else{
             pesan.setText("Password salah!");
