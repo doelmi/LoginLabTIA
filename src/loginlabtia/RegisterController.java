@@ -35,31 +35,36 @@ public class RegisterController implements Initializable {
 
     @FXML
     public void register_action(ActionEvent event) throws SQLException {
-        if (username.getText().length() == 0) {
-            pesan.setText("Username harus diisi.");
-            pesan.setTextFill(Color.RED);
-        } else if (password.getText().length() == 0) {
-            pesan.setText("Password harus diisi.");
-            pesan.setTextFill(Color.RED);
-        } else if (nama.getText().length() == 0) {
-            pesan.setText("Nama harus diisi.");
-            pesan.setTextFill(Color.RED);
-        } else if (nim.getText().length() == 0) {
-            pesan.setText("NIM harus diisi.");
-            pesan.setTextFill(Color.RED);
-        } else if (model.cekNIM(nim.getText())) {
-            pesan.setText("NIM telah terdaftar.");
-            pesan.setTextFill(Color.RED);
-        } else if (!password.getText().equals(confirm_password.getText())) {
-            pesan.setText("Password dan Confirm Password tidak sama.");
+        if (!model.isConnected()) {
+            pesan.setText("Koneksi database bermasalah.");
             pesan.setTextFill(Color.RED);
         } else {
-            if (model.register(username.getText(), password.getText(), nama.getText(), nim.getText())) {
-                pesan.setText("Berhasil Daftar! Minta Admin untuk Validasi.");
-                pesan.setTextFill(Color.GREEN);
-            } else {
-                pesan.setText("Gagal Daftar. Username telah digunakan.");
+            if (username.getText().length() == 0) {
+                pesan.setText("Username harus diisi.");
                 pesan.setTextFill(Color.RED);
+            } else if (password.getText().length() == 0) {
+                pesan.setText("Password harus diisi.");
+                pesan.setTextFill(Color.RED);
+            } else if (nama.getText().length() == 0) {
+                pesan.setText("Nama harus diisi.");
+                pesan.setTextFill(Color.RED);
+            } else if (nim.getText().length() == 0) {
+                pesan.setText("NIM harus diisi.");
+                pesan.setTextFill(Color.RED);
+            } else if (model.cekNIM(nim.getText())) {
+                pesan.setText("NIM telah terdaftar.");
+                pesan.setTextFill(Color.RED);
+            } else if (!password.getText().equals(confirm_password.getText())) {
+                pesan.setText("Password dan Confirm Password tidak sama.");
+                pesan.setTextFill(Color.RED);
+            } else {
+                if (model.register(username.getText(), password.getText(), nama.getText(), nim.getText())) {
+                    pesan.setText("Berhasil Daftar! Minta Admin untuk Validasi.");
+                    pesan.setTextFill(Color.GREEN);
+                } else {
+                    pesan.setText("Gagal Daftar. Username telah digunakan.");
+                    pesan.setTextFill(Color.RED);
+                }
             }
         }
     }
