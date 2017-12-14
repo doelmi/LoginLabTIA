@@ -139,6 +139,7 @@ public class LoginController implements Initializable {
                     pesan.setTextFill(Color.GREEN);
                     tutup.setVisible(true);
                     username_ = username.getText();
+                    model.updateStatusLogin(username.getText(), 1);
                 } else {
                     pesan.setText(model.Keterangan(model.getValidasi()));
                     pesan.setTextFill(Color.RED);

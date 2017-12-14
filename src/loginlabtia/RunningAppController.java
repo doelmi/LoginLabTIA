@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -32,39 +35,61 @@ public class RunningAppController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Model model = new Model();
+
     @FXML
-    Label username;
+    Label username, pesan;
 
     @FXML
     public void logout_action(ActionEvent event) throws SQLException, IOException {
-        ((Node) event.getSource()).getScene().getWindow().hide();
+        if (!model.isConnected()) {
+            pesan.setText("Koneksi database bermasalah.");
+            pesan.setTextFill(Color.RED);
+        } else {
+            pesan.setText("Database terkoneksi.");
+            pesan.setTextFill(Color.GREEN);
 
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage;
-        stage = new Stage();
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setAlwaysOnTop(true);
-        stage.alwaysOnTopProperty();
-        stage.setTitle("Aplikasi Login TIA+");
-        stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
+            model.updateStatusLogin(username.getText(), 1);
+            ((Node) event.getSource()).getScene().getWindow().hide();
 
-        Platform.setImplicitExit(false);
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage;
+            stage = new Stage();
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setAlwaysOnTop(true);
+            stage.alwaysOnTopProperty();
+            stage.setTitle("Aplikasi Login TIA+");
+            stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
 
-        stage.setOnCloseRequest((event1) -> {
-            System.out.println("keluar");
-            event1.consume();
-        });
+            Platform.setImplicitExit(false);
 
-        stage.show();
+            stage.setOnCloseRequest((event1) -> {
+                System.out.println("keluar");
+                event1.consume();
+            });
+
+            stage.show();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         username.setText(LoginController.username_);
+        try {
+            if (!model.isConnected()) {
+                pesan.setText("Koneksi database bermasalah.");
+                pesan.setTextFill(Color.RED);
+            } else {
+                pesan.setText("Database terkoneksi.");
+                pesan.setTextFill(Color.GREEN);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RunningAppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

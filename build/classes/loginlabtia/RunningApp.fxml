@@ -34,6 +34,7 @@
       <Pane prefHeight="51.0" prefWidth="359.0" style="-fx-background-color: #70a6ff;" BorderPane.alignment="CENTER">
          <children>
             <Button layoutX="292.0" layoutY="13.0" mnemonicParsing="false" onAction="#logout_action" style="-fx-background-color: #5494ff;" text="Logout" textFill="WHITE" />
+            <Label fx:id="pesan" layoutX="14.0" layoutY="17.0" text="Koneksi databse akan muncul disini" />
          </children>
       </Pane>
    </bottom>

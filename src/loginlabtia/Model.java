@@ -81,9 +81,28 @@ public class Model {
         return false;
     }
 
+    public boolean updateStatusLogin(String username, int status) throws SQLException {
+        Connect();
+        String query = "UPDATE `user` SET `status_login`= ? WHERE `username` = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, status);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+
+        } finally {
+            preparedStatement.close();
+        }
+        Disconnect();
+        return false;
+    }
+
     public boolean register(String username, String password, String nama, String nim) throws SQLException {
         Connect();
-        String query = "INSERT INTO `user`(`username`, `password`, `Nama`, `NIM`, `Aktif`) VALUES (?, ?, ?, ?, 0)";
+        String query = "INSERT INTO `user`(`username`, `password`, `Nama`, `NIM`, `Aktif`, `status_login`) VALUES (?, ?, ?, ?, 0, 0)";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(query);
