@@ -126,7 +126,7 @@ public class Model {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        String query = "SELECT `username`, `password`, `Aktif` FROM `user` WHERE `username`= ? AND `password` = ?";
+        String query = "SELECT `username`, `password`, `Aktif` FROM `user` WHERE `username`= ? AND `password` = ? and dihapus = 0";
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
