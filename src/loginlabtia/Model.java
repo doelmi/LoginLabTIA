@@ -102,7 +102,7 @@ public class Model {
 
     public boolean register(String username, String password, String nama, String nim) throws SQLException {
         Connect();
-        String query = "INSERT INTO `user`(`username`, `password`, `Nama`, `NIM`, `Aktif`, `status_login`) VALUES (?, ?, ?, ?, 0, 0)";
+        String query = "INSERT INTO `user`(`username`, `password`, `Nama`, `NIM`, `Aktif`, `status_login`, `dihapus`) VALUES (?, ?, ?, ?, 0, 0, 0)";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(query);
