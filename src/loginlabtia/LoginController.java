@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -49,49 +50,26 @@ public class LoginController implements Initializable {
     WebView webview;
 
     @FXML
-    Button tutup, lewati, login, daftar, go;
+    Button lewati, login, daftar, go;
 
     @FXML
     TextField username, password, no_pc, address;
 
     @FXML
-    Label pesan;
+    Text pesan;
 
     String alamat = "labtia.trunojoyo.ac.id";
     WebEngine engine;
-
-    @FXML
-    public void tutup_action(ActionEvent event) throws IOException {
-        ((Node) event.getSource()).getScene().getWindow().hide();
-
-        Stage stage;
-        Parent root;
-        stage = new Stage();
-        root = FXMLLoader.load(getClass().getResource("RunningApp.fxml"));
-        stage.setScene(new Scene(root));
-        stage.setTitle("Login Sebagai");
-        stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
-        stage.resizableProperty().setValue(Boolean.FALSE);
-
-        Platform.setImplicitExit(false);
-
-        stage.setOnCloseRequest((event1) -> {
-            System.out.println("keluar");
-            event1.consume();
-        });
-
-        stage.show();
-    }
 
     @FXML
     public void tes_koneksi_action(ActionEvent event) {
         try {
             if (!model.isConnected()) {
                 pesan.setText("Koneksi database bermasalah.");
-                pesan.setTextFill(Color.RED);
+                pesan.setFill(Color.RED);
             } else {
                 pesan.setText("Database terkoneksi.");
-                pesan.setTextFill(Color.GREEN);
+                pesan.setFill(Color.GREEN);
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,28 +107,51 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void login_action(ActionEvent event) throws SQLException {
+    public void login_action(ActionEvent event) throws SQLException, IOException {
         if (!model.isConnected()) {
             pesan.setText("Koneksi database bermasalah.");
-            pesan.setTextFill(Color.RED);
+            pesan.setFill(Color.RED);
         } else {
             if (model.login(username.getText(), password.getText(), no_pc.getText())) {
                 if ("1".equals(model.getValidasi())) {
-                    model.insertLogData(username.getText(), no_pc.getText());
-                    pesan.setText(model.Keterangan(model.getValidasi()));
-                    pesan.setTextFill(Color.GREEN);
-                    tutup.setVisible(true);
-                    username_ = username.getText();
-                    model.updateStatusLogin(username.getText(), 1);
+                    if (!model.isLoggedIn(username.getText())) {
+                        model.insertLogData(username.getText(), no_pc.getText());
+                        pesan.setText(model.Keterangan(model.getValidasi()));
+                        pesan.setFill(Color.GREEN);
+                        username_ = username.getText();
+                        model.updateStatusLogin(username.getText(), 1);
+
+                        ((Node) event.getSource()).getScene().getWindow().hide();
+
+                        Stage stage;
+                        Parent root;
+                        stage = new Stage();
+                        root = FXMLLoader.load(getClass().getResource("RunningApp.fxml"));
+                        stage.setScene(new Scene(root));
+                        stage.setTitle("Login Sebagai");
+                        stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
+                        stage.resizableProperty().setValue(Boolean.FALSE);
+
+                        Platform.setImplicitExit(false);
+
+                        stage.setOnCloseRequest((event1) -> {
+                            System.out.println("keluar");
+                            event1.consume();
+                        });
+
+                        stage.show();
+                    } else {
+                        pesan.setText("Akun ini sedang digunakan. Silakan hubungi Admin jika ini adalah kesalahan.");
+                        pesan.setFill(Color.RED);
+                    }
+
                 } else {
                     pesan.setText(model.Keterangan(model.getValidasi()));
-                    pesan.setTextFill(Color.RED);
-                    tutup.setVisible(false);
+                    pesan.setFill(Color.RED);
                 }
             } else {
                 pesan.setText("Username atau Password salah.");
-                pesan.setTextFill(Color.RED);
-                tutup.setVisible(false);
+                pesan.setFill(Color.RED);
             }
         }
     }
@@ -182,7 +183,6 @@ public class LoginController implements Initializable {
         engine = webview.getEngine();
         engine.load("http://" + alamat);
         address.setText(alamat);
-        tutup.setVisible(false);
 
         no_pc.setText(model.getPCName());
         no_pc.setEditable(false);

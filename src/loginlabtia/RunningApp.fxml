@@ -26,6 +26,9 @@
                <font>
                   <Font size="35.0" />
                </font>
+               <tooltip>
+                  <Tooltip fx:id="username_tooltip" text="username" />
+               </tooltip>
             </Label>
          </children>
       </Pane>

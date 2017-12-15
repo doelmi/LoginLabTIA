@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -39,6 +40,9 @@ public class RunningAppController implements Initializable {
 
     @FXML
     Label username, pesan;
+    
+    @FXML
+    Tooltip username_tooltip;
 
     @FXML
     public void logout_action(ActionEvent event) throws SQLException, IOException {
@@ -79,6 +83,11 @@ public class RunningAppController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         username.setText(LoginController.username_);
+        try {
+            username_tooltip.setText(model.getNamaNIM(LoginController.username_));
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 
 }

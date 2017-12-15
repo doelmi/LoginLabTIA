@@ -28,13 +28,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Button>
-                        <Label fx:id="pesan" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="512.0" prefHeight="17.0" prefWidth="252.0" text="Silakan login untuk menggunakan PC ini." textAlignment="CENTER" />
-                        <Button fx:id="tutup" layoutX="34.0" layoutY="540.0" mnemonicParsing="false" onAction="#tutup_action" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #ff7070;" text="Tutup" textFill="WHITE">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Button>
-                  <Button fx:id="tes_koneksi" layoutX="34.0" layoutY="594.0" mnemonicParsing="false" onAction="#tes_koneksi_action" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #39ef60;" text="Tes Koneksi" textFill="WHITE">
+                  <Button fx:id="tes_koneksi" layoutX="34.0" layoutY="583.0" mnemonicParsing="false" onAction="#tes_koneksi_action" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #39ef60;" text="Tes Koneksi" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -46,6 +40,7 @@
                   </Label>
                   <TextField fx:id="address" layoutX="73.0" layoutY="25.0" prefHeight="34.0" prefWidth="170.0" promptText="Masukkan alamat web" style="-fx-background-color: white;" />
                   <Button fx:id="go" layoutX="250.0" layoutY="25.0" mnemonicParsing="false" onAction="#go_action" prefHeight="34.0" prefWidth="43.0" style="-fx-background-color: #5494ff;" text="Go" textFill="WHITE" />
+                  <Text fx:id="pesan" layoutX="40.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Silakan login untuk menggunakan PC ini." textAlignment="CENTER" wrappingWidth="236.421875" />
                   
                     </children>
                 </Pane>

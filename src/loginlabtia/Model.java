@@ -146,6 +146,54 @@ public class Model {
         return false;
     }
 
+    public String getNamaNIM(String username) throws SQLException {
+        Connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String query = "SELECT `nama`, `NIM` FROM `user` WHERE `username`= ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getString("nama")+" "+resultSet.getString("NIM");
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            preparedStatement.close();
+            resultSet.close();
+        }
+        Disconnect();
+        return null;
+    }
+
+    public boolean isLoggedIn(String username) throws SQLException {
+        Connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String query = "SELECT `status_login` FROM `user` WHERE `username`= ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getInt("status_login") == 1) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            preparedStatement.close();
+            resultSet.close();
+        }
+        Disconnect();
+        return false;
+    }
+
     public boolean cekNIM(String nim) throws SQLException {
         Connect();
         PreparedStatement preparedStatement = null;
@@ -205,5 +253,5 @@ public class Model {
 
         return hostname;
     }
-    
+
 }
