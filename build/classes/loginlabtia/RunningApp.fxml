@@ -22,13 +22,19 @@
    <center>
       <Pane prefHeight="103.0" prefWidth="359.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="36.0" prefHeight="46.0" prefWidth="330.0" text="username" textAlignment="CENTER">
+            <Label fx:id="username" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="11.0" prefHeight="46.0" prefWidth="330.0" text="username" textAlignment="CENTER">
                <font>
                   <Font size="35.0" />
                </font>
                <tooltip>
                   <Tooltip fx:id="username_tooltip" text="username" />
                </tooltip>
+            </Label>
+            <Label layoutX="102.0" layoutY="67.0" text="Kamu telah memakai selama :" />
+            <Label fx:id="waktu" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="86.0" prefHeight="17.0" prefWidth="231.0" text="00:00:00" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
          </children>
       </Pane>

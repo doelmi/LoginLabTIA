@@ -20,8 +20,8 @@
                                 <Image url="@img/logo.png" />
                             </image>
                         </ImageView>
-                        <TextField fx:id="username" layoutX="34.0" layoutY="297.0" prefHeight="45.0" prefWidth="250.0" promptText="Username" style="-fx-background-color: white;" />
-                        <PasswordField fx:id="password" layoutX="34.0" layoutY="350.0" prefHeight="45.0" prefWidth="250.0" promptText="Password" style="-fx-background-color: white;" />
+                        <TextField fx:id="username" layoutX="34.0" layoutY="297.0" onKeyPressed="#field_onKeyPressed" prefHeight="45.0" prefWidth="250.0" promptText="Username" style="-fx-background-color: white;" />
+                        <PasswordField fx:id="password" layoutX="34.0" layoutY="350.0" onKeyPressed="#field_onKeyPressed" prefHeight="45.0" prefWidth="250.0" promptText="Password" style="-fx-background-color: white;" />
                         <TextField fx:id="no_pc" layoutX="34.0" layoutY="403.0" prefHeight="45.0" prefWidth="250.0" promptText="No. PC" style="-fx-background-color: white;" />
                         <Button fx:id="login" layoutX="34.0" layoutY="456.0" mnemonicParsing="false" onAction="#login_action" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #5494ff;" text="Login" textFill="WHITE">
                             <font>
@@ -41,6 +41,8 @@
                   <TextField fx:id="address" layoutX="73.0" layoutY="25.0" prefHeight="34.0" prefWidth="170.0" promptText="Masukkan alamat web" style="-fx-background-color: white;" />
                   <Button fx:id="go" layoutX="250.0" layoutY="25.0" mnemonicParsing="false" onAction="#go_action" prefHeight="34.0" prefWidth="43.0" style="-fx-background-color: #5494ff;" text="Go" textFill="WHITE" />
                   <Text fx:id="pesan" layoutX="40.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Silakan login untuk menggunakan PC ini." textAlignment="CENTER" wrappingWidth="236.421875" />
+                  <Text layoutX="35.0" layoutY="697.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jika Kamu tidak segera Login, komputer ini akan shutdown dalam : (5 menit) " textAlignment="CENTER" wrappingWidth="248.435546875" />
+                  <Label fx:id="detikan" alignment="CENTER" layoutX="126.0" layoutY="723.0" prefHeight="17.0" prefWidth="64.0" text="300 detik" textAlignment="CENTER" />
                   
                     </children>
                 </Pane>

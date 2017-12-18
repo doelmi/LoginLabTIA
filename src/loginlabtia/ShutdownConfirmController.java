@@ -26,7 +26,7 @@ public class ShutdownConfirmController implements Initializable {
      */
     @FXML
     public void shutdown_action(ActionEvent event) throws IOException {
-        Runtime.getRuntime().exec("shutdown -s -t 3");
+        Runtime.getRuntime().exec("shutdown -s -t 0");
         ((Node) event.getSource()).getScene().getWindow().hide();
     }
     

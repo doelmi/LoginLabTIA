@@ -71,11 +71,12 @@ public class Model {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, no_pc);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
             return true;
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
+
         }
         Disconnect();
         return false;
@@ -90,11 +91,12 @@ public class Model {
             preparedStatement.setInt(1, status);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
             return true;
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
+
         }
         Disconnect();
         return false;
@@ -111,11 +113,13 @@ public class Model {
             preparedStatement.setString(3, nama);
             preparedStatement.setString(4, nim);
             preparedStatement.executeUpdate();
+
+            preparedStatement.close();
             return true;
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
+
         }
         Disconnect();
         return false;
@@ -134,13 +138,15 @@ public class Model {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 setValidasi(resultSet.getString("Aktif"));
+
+                preparedStatement.close();
+                resultSet.close();
                 return true;
             }
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
-            resultSet.close();
+
         }
         Disconnect();
         return false;
@@ -157,13 +163,15 @@ public class Model {
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return resultSet.getString("nama")+" "+resultSet.getString("NIM");
+                String namaNIM = resultSet.getString("nama") + " " + resultSet.getString("NIM");
+                preparedStatement.close();
+                resultSet.close();
+                return namaNIM;
             }
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
-            resultSet.close();
+
         }
         Disconnect();
         return null;
@@ -181,14 +189,15 @@ public class Model {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 if (resultSet.getInt("status_login") == 1) {
+                    preparedStatement.close();
+                    resultSet.close();
                     return true;
                 }
             }
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
-            resultSet.close();
+
         }
         Disconnect();
         return false;
@@ -205,13 +214,38 @@ public class Model {
             preparedStatement.setString(1, nim);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                preparedStatement.close();
+                resultSet.close();
                 return true;
             }
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
-            resultSet.close();
+
+        }
+        Disconnect();
+        return false;
+    }
+
+    public boolean cekUsername(String username) throws SQLException {
+        Connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String query = "SELECT * FROM `user` WHERE username = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                preparedStatement.close();
+                resultSet.close();
+                return true;
+            }
+        } catch (SQLException e) {
+
+        } finally {
+
         }
         Disconnect();
         return false;
@@ -228,13 +262,15 @@ public class Model {
             preparedStatement.setString(1, status);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return resultSet.getString("keterangan");
+                String ket = resultSet.getString("keterangan");
+                preparedStatement.close();
+                resultSet.close();
+                return ket;
             }
         } catch (SQLException e) {
 
         } finally {
-            preparedStatement.close();
-            resultSet.close();
+
         }
         Disconnect();
         return null;

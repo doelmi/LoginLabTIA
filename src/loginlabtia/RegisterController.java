@@ -11,9 +11,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 
 /**
  * FXML Controller class
@@ -42,6 +45,9 @@ public class RegisterController implements Initializable {
             if (username.getText().length() == 0) {
                 pesan.setText("Username harus diisi.");
                 pesan.setTextFill(Color.RED);
+            } else if (model.cekUsername(username.getText())) {
+                pesan.setText("Username telah terdaftar.");
+                pesan.setTextFill(Color.RED);
             } else if (password.getText().length() == 0) {
                 pesan.setText("Password harus diisi.");
                 pesan.setTextFill(Color.RED);
@@ -61,8 +67,17 @@ public class RegisterController implements Initializable {
                 if (model.register(username.getText(), password.getText(), nama.getText(), nim.getText())) {
                     pesan.setText("Berhasil Daftar! Minta Admin untuk Validasi.");
                     pesan.setTextFill(Color.GREEN);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText("Akun kamu telah terdaftar.");
+                    alert.setContentText("Akun kamu telah berhasil dibuat. Tahap selanjutnya adalah mengaktifkan akun kamu. Segera hubungi Admin untuk validasi akun kamu.");
+                    alert.setTitle("Akun terdaftar");
+                    alert.initModality(Modality.APPLICATION_MODAL);
+                    alert.initOwner(pesan.getScene().getWindow());
+                    alert.showAndWait();
+                    ((Node) event.getSource()).getScene().getWindow().hide();
                 } else {
-                    pesan.setText("Gagal Daftar. Username telah digunakan.");
+                    pesan.setText("Gagal Daftar. Ada yang salah.");
                     pesan.setTextFill(Color.RED);
                 }
             }
