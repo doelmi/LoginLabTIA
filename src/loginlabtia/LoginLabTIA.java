@@ -35,7 +35,6 @@ public class LoginLabTIA extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setAlwaysOnTop(true);
         stage.alwaysOnTopProperty();
-        stage.setTitle("Aplikasi Login TIA+");
         stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
         
         Platform.setImplicitExit(false);

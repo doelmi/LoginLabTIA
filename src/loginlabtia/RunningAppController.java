@@ -27,6 +27,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -43,7 +45,10 @@ public class RunningAppController implements Initializable {
      * Initializes the controller class.
      */
     Model model = new Model();
-
+    
+//    @FXML
+//    WebView chat_pane;
+    
     @FXML
     Label username, pesan, waktu;
 
@@ -61,6 +66,9 @@ public class RunningAppController implements Initializable {
 
             model.updateStatusLogin(username.getText(), 0);
             ((Node) event.getSource()).getScene().getWindow().hide();
+            
+            timeline.stop();
+            ceklogin.stop();
 
             Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Scene scene = new Scene(root);
@@ -71,7 +79,6 @@ public class RunningAppController implements Initializable {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setAlwaysOnTop(true);
             stage.alwaysOnTopProperty();
-            stage.setTitle("Aplikasi Login TIA+");
             stage.getIcons().add(new Image("/loginlabtia/img/logo.png"));
 
             Platform.setImplicitExit(false);
@@ -85,9 +92,14 @@ public class RunningAppController implements Initializable {
         }
     }
     int detik = 1, menit = 0, jam = 0;
+    Timeline timeline = new Timeline();
+    Timeline ceklogin = new Timeline();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        WebEngine engine = chat_pane.getEngine();
+//        engine.load("http:"+model.IP_SERVER+":4000?handle="+LoginController.username_);
+//        
         // TODO
         username.setText(LoginController.username_);
 
@@ -96,8 +108,6 @@ public class RunningAppController implements Initializable {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-
-        Timeline timeline = new Timeline();
 
         KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> {
             waktu.setText(String.format("%02d", jam) + ":" + String.format("%02d", menit) + ":" + String.format("%02d", detik));
@@ -115,9 +125,7 @@ public class RunningAppController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.playFromStart();
 
-        Timeline ceklogin = new Timeline();
-
-        KeyFrame keyFrame = new KeyFrame(Duration.seconds(10), (ActionEvent event) -> {
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(60), (ActionEvent event) -> {
             try {
                 if (!model.isLoggedIn(username.getText())) {
                     System.out.println("masuk if");
@@ -154,7 +162,7 @@ public class RunningAppController implements Initializable {
                     alert.initOwner(stage);
                     alert.show();
 
-                }else{
+                } else {
                     System.out.println("masuk sini!");
                 }
             } catch (SQLException | IOException ex) {

@@ -50,7 +50,7 @@ public class Model {
 
     public static Connection Connector() {
         try {
-            String server = "//10.5.10.5:3306";
+            String server = "//"+getIPServer()+":3306";
             String db_name = "db_login_tia";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             String dbURL = "jdbc:mysql:" + server + "/" + db_name;
@@ -287,6 +287,21 @@ public class Model {
             System.out.println("Hostname can not be resolved");
         }
 
+        return hostname;
+    }
+
+    public static String getIPServer() {
+        String hostname = "10.6.2.10";
+
+        try {
+            InetAddress addr;
+            addr = InetAddress.getLocalHost();
+            hostname = addr.getHostAddress();
+            String digit[] = hostname.replace(".", " ").split(" ");
+            hostname = digit[0] + "." + digit[1] + "." + digit[2] + ".10";
+        } catch (UnknownHostException ex) {
+            System.out.println("IP can not be resolved");
+        }
         return hostname;
     }
 

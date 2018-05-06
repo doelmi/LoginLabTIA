@@ -104,6 +104,8 @@ public class LoginController implements Initializable {
         });
 
         stageRunApp.show();
+        
+        timeline.stop();
     }
 
     public void login(ActionEvent event) throws SQLException, IOException {
@@ -189,6 +191,7 @@ public class LoginController implements Initializable {
 
     @FXML
     public void daftar_action(ActionEvent event) throws IOException {
+        timeline.pause();
         Stage stage;
         Parent root;
         stage = new Stage();
@@ -200,6 +203,7 @@ public class LoginController implements Initializable {
         stage.resizableProperty().setValue(Boolean.FALSE);
         stage.initOwner(daftar.getScene().getWindow());
         stage.showAndWait();
+        timeline.play();
     }
 
     @FXML
@@ -238,7 +242,8 @@ public class LoginController implements Initializable {
         stage.initOwner(daftar.getScene().getWindow());
         stage.showAndWait();
     }
-    int detik = 10;
+    int detik = 300;
+    Timeline timeline = new Timeline();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -250,18 +255,17 @@ public class LoginController implements Initializable {
         no_pc.setText(model.getPCName());
         no_pc.setEditable(false);
 
-        Timeline timeline = new Timeline();
-
         KeyFrame kf = new KeyFrame(Duration.seconds(1), (ActionEvent event) -> {
             detikan.setText(detik + " detik");
             detik--;
             if (detik <= 0) {
                 detik = 0;
                 try {
-                    Runtime.getRuntime().exec("shutdown -s -t 3");
+                    Runtime.getRuntime().exec("shutdown -s -t 0");
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
+                timeline.stop();
             }
         });
         timeline.getKeyFrames().add(kf);
